@@ -1,0 +1,309 @@
+GO TO PROJECT FOLDER PATH IN TERMINAL:
+
+npm create vite@latest frontend --template react
+cd frontend
+
+npm install
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+In tailwind.config.css, change:
+content: ['./index.html', './src/**/*.{js,jsx}'],
+
+Add Tailwind directives to src/index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Delete App.css
+
+npm run dev
+
+MySQLCommand to run: mvn spring-boot:run
+
+
+To integrate a Telegram bot into your existing Question service, you’ll need to use the Telegram Bot API. Here's a step-by-step guide on how to integrate a Telegram bot with your service:
+
+Steps:
+Set up Telegram Bot:
+
+Create a bot on Telegram:
+Open the Telegram app and search for the BotFather.
+Start a chat and type /newbot.
+Follow the prompts to create a bot and get a Bot Token to to authenticate your bot in your Java application.
+
+BotName: faqtelegrambot
+Username: faqqueriesbot
+API Token: 7879601366:AAHqtDmiehvvhDUC9MlgCN8jqtcyLK5PVsc
+
+Add Dependencies for Telegram Bot: Add a library to interact with the Telegram Bot API. One popular Java library for this is TelegramBots.
+
+Add the dependency to project.
+
+MySQL Connection Name: FAQTelegramBot
+
+In MySQL workbench,
+
+CREATE DATABASE questionservice;
+
+CREATE USER 'your_username'@'localhost' IDENTIFIED BY 'your_password';
+CREATE USER 'botuser'@'localhost' IDENTIFIED BY 'bot123';
+
+GRANT ALL PRIVILEGES ON questionservice.* TO 'your_username'@'localhost';
+FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON questionservice.* TO 'botuser'@'bot123';
+FLUSH PRIVILEGES;
+
+USE questionservice;
+
+CREATE TABLE question (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    question_text VARCHAR(255) NOT NULL,
+    answer VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO question (question_text, answer) VALUES
+('What is Spring Boot?', 'Spring Boot is a framework to simplify Spring application development.'),
+('What is Java?', 'Java is a high-level, object-oriented programming language.');
+
+INSERT INTO question (question_text, answer) VALUES
+('What are the admission requirements for undergraduate programs?', 'Applicants need to submit their high school transcripts, SAT/ACT scores, a personal statement, and recommendation letters.'),
+('How can I apply for a course at ABC University?', 'You can apply through the university’s online application portal.'),
+('What is the application deadline for the fall semester?', 'The application deadline for the fall semester is March 15th.'),
+('Does ABC University offer online courses?', 'Yes, ABC University offers a wide range of online courses.'),
+('How do I check the status of my application?', 'You can check your application status through the admissions portal using your login credentials.'),
+('What are the tuition fees for undergraduate programs?', 'The tuition fees for undergraduate programs are $15,000 per semester for domestic students and $20,000 for international students.'),
+('Does ABC University offer scholarships?', 'Yes, ABC University offers merit-based and need-based scholarships.'),
+('What is the process for applying for a scholarship?', 'You can apply for scholarships through the financial aid section of the application portal.'),
+('Can I change my major after enrolling?', 'Yes, students can change their major by submitting a request to the academic advisor.'),
+('How do I register for courses?', 'Students can register for courses through the student portal after meeting with their academic advisor.'),
+('What is the deadline to drop a course?', 'The deadline to drop a course without a penalty is within the first two weeks of the semester.'),
+('What happens if I drop a course after the deadline?', 'Dropping a course after the deadline may result in a grade of “W” and could affect your tuition refund.'),
+('Can international students enroll at ABC University?', 'Yes, ABC University welcomes applications from international students.'),
+('What are the English language requirements for international students?', 'International students need to provide a TOEFL score of 80 or IELTS score of 6.5 or higher.'),
+('Does ABC University offer graduate programs?', 'Yes, we offer a variety of graduate programs across multiple disciplines.'),
+('What is the process for transferring credits from another university?', 'Transfer credits are evaluated by the admissions office. You need to submit your official transcripts for review.'),
+('Are there any orientation programs for new students?', 'Yes, there is a mandatory orientation program held one week before the semester begins.'),
+('What is the minimum GPA required for admission?', 'The minimum GPA required for undergraduate admission is 2.5.'),
+('How do I get a student ID card?', 'You can get your student ID card from the Student Services Office after completing your enrollment.'),
+('What is the contact information for the admissions office?', 'You can contact the admissions office at admissions@abcuniversity.edu or call (123) 456-7890.');
+
+POSTMAN Testing:
+http://localhost:8080/questions/getAnswer?questionText=How can I apply for a course at ABC University?
+
+{
+    "id": 2,
+    "questionText": "How can I apply for a course at ABC University?",
+    "answer": "You can apply through the university’s online application portal."
+}
+
+NLP Service Backend using Python:
+
+cd nlpservice_backend
+
+python -m venv env
+
+.\env\Scripts\activate
+
+pip install spacy
+
+pip install flask
+
+python -m spacy download en_core_web_md
+
+python nlp_service.py
+
+Step-by-Step Procedure for Python Backend Dockerization
+1. Prepare Your Python Flask App
+Ensure your Python Flask app (app.py) is working locally. Verify it runs without errors using:
+python app.py
+
+2. Create a requirements.txt File
+This file lists all dependencies your Flask app requires. Generate it using:
+pip freeze > requirements.txt
+
+Ensure the file includes essential libraries like Flask, spaCy, and any other dependencies.
+
+3. Write the Dockerfile
+Create a Dockerfile in the root of your Python project directory.
+
+4. Create a .dockerignore File
+Prevent unnecessary files from being included in your Docker image. Create a .dockerignore file in the project root.
+
+5. Build the Docker Image
+Run the following command in the terminal from the directory where the Dockerfile is located:
+
+docker build -t nlpservice_backend .
+
+6. Run the Docker Container
+Run your Docker container to ensure it works as expected:
+
+docker run -d -p 5000:5000 nlpservice_backend
+
+Verify your app by visiting http://localhost:5000 in a browser or using Postman.
+
+7. (Optional) Tag and Push the Image to Docker Hub
+If you want to deploy the container elsewhere (like Docker Hub), log in to Docker and push the image:
+
+docker login
+docker tag nlpservice_backend:latest <your-dockerhub-username>/nlpservice_backend:latest
+docker push <your-dockerhub-username>/nlpservice_backend:latest
+
+Verify the Container
+Check Running Containers: Run the following command to ensure your container is up and running:
+docker ps
+Look for the container with the name or ID matching your nlpservice_backend. Ensure its STATUS is "Up".
+
+____________________________________________________
+
+Dockerizing the Spring Boot (Java) application (questionservice):
+
+Create Dockerfile
+
+1. Build the Docker image:
+docker build -t questionservice .
+
+2. Run the Docker container:
+docker run -p 8080:8080 questionservice
+
+1. Creating MySQL Container
+To containerize MySQL, you’ll need to create a Docker container for it. Follow these steps to create and run a MySQL container:
+
+Pull MySQL Docker Image: Open your terminal and pull the official MySQL image:
+
+docker pull mysql:latest
+
+Run MySQL Container: You can run a MySQL container using the following command. This will start MySQL with your desired configuration:
+
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=AumMuruga7*123 -e MYSQL_DATABASE=questionservice -p 3306:3306 -d mysql:latest
+
+//docker rm mysql-container - use it to remove existing container and create again with same name
+
+Build and Run QuestionService:
+
+docker build -t questionservice .
+
+#Don't use this
+#docker run --name questionservice-container -p 8080:8080 --link mysql-container:mysql --link agitated_margulis:nlpservice_backend -d questionservice
+
+Navigate to the directory containing the docker-compose.yml file and run:
+
+docker-compose up --build
+This command will:
+Start the MySQL database.
+Start the NLP Service (Flask-based).
+Start the Question Service (Spring Boot).
+
+Monitor Logs:
+
+You can monitor logs from all services for errors or interactions:
+
+docker-compose logs -f
+
+Stop Services
+To stop all running services:
+
+docker-compose down
+
+Stopping individual service:
+docker stop agitated_margulis (FOR BACKEND)
+
+To start all services:
+
+docker-compose up --build
+
+Stop Services:
+To stop all running services:
+
+docker-compose down
+
+Monitor Logs
+To check if everything is running smoothly or to debug any errors:
+
+docker-compose logs -f
+
+Key Notes:
+wait-for-it.sh: The entrypoint for the questionservice container is modified to run the wait-for-it.sh script, which waits for MySQL (mysql-container) to be ready on port 3306. Once MySQL is available, it runs the java -jar app.jar command to start the questionservice.
+depends_on: While depends_on ensures that mysql and nlpservice are started before questionservice, wait-for-it.sh ensures that the questionservice container waits until MySQL is ready to accept connections. This avoids issues where the Java application might try to connect to MySQL before it's ready.
+Example Flow:
+MySQL starts and listens on port 3306.
+questionservice starts, but it doesn't proceed to start the Java app until wait-for-it.sh confirms that MySQL is accessible.
+Once MySQL is ready, wait-for-it.sh allows the Java application to start.
+
+https://github.com/vishnubob/wait-for-it/blob/master/wait-for-it.sh
+
+chmod +x wait-for-it.sh
+
+1. Check Which Process is Using Port 5000
+You need to identify which process is using port 5000 and either stop it or use a different port for your container.
+
+On Windows (PowerShell or Command Prompt):
+netstat -aon | findstr :5000
+
+This will display the process ID (PID) using port 5000.
+
+Find the corresponding process:
+
+tasklist | findstr <PID>
+
+2. Stop the Process Using Port 5000 (If Safe to Do So)
+Once you have identified the process, you can stop it if it is safe to do so:
+
+taskkill /PID <PID> /F
+
+
+GITHIB:
+
+Add a Remote Repository
+Go to your newly created GitHub repository page (e.g., https://github.com/username/FAQTELEGRAMBOT.git).
+
+Summary of Commands:
+Initialize Git repository:
+
+git init
+
+Create .gitignore file (optional but recommended).
+
+Stage all files:
+
+git add .
+
+Commit files:
+
+git commit -m "Initial commit for FAQTELEGRAMBOT project with mysql queries, questionservice, and nlpservice_backend"
+
+Add the remote repository:
+
+git remote add origin https://github.com/RamadeviKN/FAQTelegramBot.git
+
+Push the files to GitHub:
+
+git push -u origin main
+
+Fetch the latest changes from GitHub:
+
+git fetch origin
+
+Pull the latest changes into your local branch 
+
+git pull origin main
+
+Push your local changes:
+
+git push -u origin main
+
+To choose the branch:
+git checkout -b main
+
+
+
+
+
+
+
+
+
+
+

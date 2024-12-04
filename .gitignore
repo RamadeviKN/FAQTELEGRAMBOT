@@ -1,0 +1,50 @@
+# Java-related
+*.class
+*.jar
+*.war
+*.ear
+*.log
+target/
+.idea/
+*.iml
+
+# Python-related
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+env/
+venv/
+
+# Docker-related
+**/docker-compose.yml
+**/Dockerfile
+*.log
+docker-compose.override.yml
+
+# MySQL DB files
+*.sql
+*.sqlite
+
+# IntelliJ IDE files
+.idea/
+*.iml
+*.iws
+
+# VSCode files
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Eclipse files
+.project
+.classpath
+.settings/
+
+# Maven (Java) build directories
+.mvn/
+target/
